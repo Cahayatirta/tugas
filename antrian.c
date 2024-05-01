@@ -23,22 +23,23 @@ int main() {
 
     while (1)
     {
-        printf("\nMenu : \n1. Tambah Antrian\n2. Proses Pembayaran\n3. Lihat Antrian\n4. Keluar\n");
+        printf("\n\nMenu : \n1. Tambah Antrian\n2. Proses Pembayaran\n3. Lihat Antrian\n4. Keluar\n");
         scanf("%d", &pilihan);
         switch (pilihan)
         {
+        // CASE 1 tambah antiran
         case 1:
             if (status >= maks_antrian)
             {
-                printf("jumlah antiran sudah mencapai batas maksimul yaitu %d", status);
+                printf("\njumlah antiran sudah mencapai batas Maksimum yaitu %d", status);
             }else
             {
                 if (data_belakang + 1 == maks_data)
                 {
-                    printf("Sudah Mencapai batas data harian");
+                    printf("\nSudah Mencapai batas data harian");
                     break;
                 }
-                printf("Input Data Mahasiswa\n");
+                printf("\nInput Data Mahasiswa\n");
                 getchar();
                 printf("Nama : ");
                 fgets(Data[data_belakang + 1].nama, sizeof(Data[data_belakang + 1].nama), stdin);
@@ -58,7 +59,7 @@ int main() {
         case 2:
                 if (status != 0)
                 {
-                    printf("Data mahasiswa\n");
+                    printf("\nData mahasiswa\n");
                     printf("Nama : %s\n", Data[data_depan + 1].nama);
                     printf("Nim : %s\n", Data[data_depan + 1].nim);
                     printf("UKT : %d\n", Data[data_depan + 1].ukt);
@@ -75,21 +76,41 @@ int main() {
                     }
                     if (Data[data_depan + 1].nominal == 0) 
                     {
-                        printf("Uang yang anda masukan sudah pas\n");
+                        printf("\nUang yang anda masukan sudah pas\n");
                         data_depan++;
                         status--;
                     }else if (Data[data_depan + 1].nominal > 0)
                     {
-                        printf("Kembalian : %d \n", Data[data_depan + 1].nominal);
+                        printf("\nKembalian : %d \n", Data[data_depan + 1].nominal);
                         data_depan++;
                         status--;
                     }
                 }else
                 {
-                    printf("Antiran Kosong\n");
+                    printf("\nAntrian Kosong\n");
                 }
             break;
+        case 3:
+            if (status != 0)
+            {
+                printf("\nDaftar Antrian\n");
+                printf("| %-40s | %-11s | %3s | %-16s | \n\n", "Nama", "NIM", "UKT", "Nominal");
+                for (int i = data_depan + 1; i < data_belakang + 1 ; i++)
+                {
+                    printf("| %-40s | %-11s | %-3d | Rp.%-13d |\n", Data[i].nama, Data[i].nim, Data[i].ukt, Data[i].nominal);
+                }
+                }else
+                {
+                    printf("\nAntrian Kosong\n");
+                }
+        break;
+            
+        case 4:
+            printf("\nTerimaksih\n");
+            exit(0);
+        break;
         default:
+            printf("\nPilihan Tidak Tersedia\n");
             break;
         }
     }
