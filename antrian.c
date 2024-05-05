@@ -81,7 +81,7 @@ int main() {
                         printf("\nUang yang anda masukan sudah pas\n");
                     }else if (Data[data_depan].nominal < 0)
                     {
-                        printf("\nKembalian : %d \n", Data[data_depan + 1].nominal);
+                        printf("\nKembalian : %d \n", abs(Data[data_depan + 1].nominal));
                     }
                 }else
                 {

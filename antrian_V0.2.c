@@ -56,30 +56,28 @@ int main() {
         case 2:
                 if (status != 0)
                 {
+                    data_depan++;
                     printf("\nData mahasiswa\n");
-                    printf("Nama : %s\n", Data[data_depan + 1].nama);
-                    printf("Nim : %s\n", Data[data_depan + 1].nim);
-                    printf("UKT : %d\n", Data[data_depan + 1].ukt);
-                    printf("Nominal : %d\n", Data[data_depan + 1].nominal);
+                    printf("Nama : %s\n", Data[data_depan].nama);
+                    printf("Nim : %s\n", Data[data_depan].nim);
+                    printf("UKT : %d\n", Data[data_depan].ukt);
+                    printf("Nominal : %d\n", Data[data_depan].nominal);
                     printf("Masukan Nominal Bayar : ");
                     scanf("%d", &total_bayar);
-                    Data[data_depan + 1].nominal = total_bayar - Data[data_depan + 1].nominal;
+                    Data[data_depan].nominal -= total_bayar ;
 
-                    if (Data[data_depan + 1].nominal == 0) 
+                    if (Data[data_depan].nominal == 0) 
                     {
                         printf("\nUang yang anda masukan sudah pas\n");
-                        data_depan++;
-                        status--;
-                    }else if (Data[data_depan + 1].nominal > 0)
+                    }else if (Data[data_depan].nominal < 0)
                     {
-                        printf("\nKembalian : %d \n", Data[data_depan + 1].nominal);
-                        data_depan++;
-                        status--;
+                        printf("\nKembalian : %d \n", abs(Data[data_depan].nominal));
                     }
                 }else
                 {
                     printf("\nAntrian Kosong\n");
                 }
+            status--;
             break;
         case 3:
             if (status == 0)
