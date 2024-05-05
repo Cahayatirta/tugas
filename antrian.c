@@ -13,6 +13,7 @@ struct Pembayaran
 
 int main() {
     int maks_antrian, maks_data, pilihan,status = 0, data_depan = -1, data_belakang = -1, total_bayar = 0;
+    char keluar;
     printf("Program Antrian Pembayaran UKT\n");
     printf("Input maks antrian : ");
     scanf("%d", &maks_antrian);
@@ -106,12 +107,20 @@ int main() {
         break;
             
         case 4:
-            printf("\nTerimaksih\n");
-            exit(0);
-        break;
+            printf("\nApakah Anda Yakin (Y/T) ?");
+            scanf(" %c", &keluar);
+            if (keluar == 'y' || keluar == 'Y')
+            {
+                printf("\nTerimaksih\n");
+                exit(0);
+            }else
+            {
+                break;
+            }
         default:
             printf("\nPilihan Tidak Tersedia\n");
             break;
+        break;
         }
     }
      
