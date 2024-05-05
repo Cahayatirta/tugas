@@ -40,56 +40,54 @@ int main() {
                     printf("\nSudah Mencapai batas data harian");
                     break;
                 }
+                data_belakang++;
                 printf("\nInput Data Mahasiswa\n");
                 getchar();
                 printf("Nama : ");
-                fgets(Data[data_belakang + 1].nama, sizeof(Data[data_belakang + 1].nama), stdin);
-                strtok(Data[data_belakang + 1].nama, "\n");
+                fgets(Data[data_belakang].nama, sizeof(Data[data_belakang].nama), stdin);
+                strtok(Data[data_belakang].nama, "\n");
                 printf("Nim : ");
-                fgets(Data[data_belakang + 1].nim, sizeof(Data[data_belakang + 1].nim), stdin);
-                strtok(Data[data_belakang + 1].nim, "\n");
+                fgets(Data[data_belakang].nim, sizeof(Data[data_belakang].nim), stdin);
+                strtok(Data[data_belakang].nim, "\n");
                 printf("UKT : ");
-                scanf("%d", &Data[data_belakang + 1].ukt);
+                scanf("%d", &Data[data_belakang].ukt);
                 printf("Nominal : ");
-                scanf("%d", &Data[data_belakang + 1].nominal);
+                scanf("%d", &Data[data_belakang].nominal);
                 printf("\nData Berhasil Ditambahkan\n");
-                data_belakang++;
                 status++;
             }
             break;
         case 2:
                 if (status != 0)
                 {
+                    data_depan++;
                     printf("\nData mahasiswa\n");
-                    printf("Nama : %s\n", Data[data_depan + 1].nama);
-                    printf("Nim : %s\n", Data[data_depan + 1].nim);
-                    printf("UKT : %d\n", Data[data_depan + 1].ukt);
-                    printf("Nominal : %d\n", Data[data_depan + 1].nominal);
+                    printf("Nama : %s\n", Data[data_depan].nama);
+                    printf("Nim : %s\n", Data[data_depan].nim);
+                    printf("UKT : %d\n", Data[data_depan].ukt);
+                    printf("Nominal : %d\n", Data[data_depan].nominal);
                     printf("Masukan Nominal Bayar : ");
                     scanf("%d", &total_bayar);
-                    Data[data_depan + 1].nominal = total_bayar - Data[data_depan + 1].nominal;
+                    Data[data_depan].nominal -= total_bayar;
 
-                    while (Data[data_depan + 1].nominal < 0)
+                    while (Data[data_depan].nominal > 0)
                     {
-                        printf("\nUang yang anda masukan kurang %d\nMasukan Nominal Bayar : ", abs(Data[data_depan + 1].nominal));
+                        printf("\nUang yang anda masukan kurang %d\nMasukan Nominal Bayar : ", Data[data_depan].nominal);
                         scanf("%d", &total_bayar);
-                        Data[data_depan + 1].nominal = total_bayar + Data[data_depan + 1].nominal;
+                        Data[data_depan].nominal -= total_bayar ;
                     }
-                    if (Data[data_depan + 1].nominal == 0) 
+                    if (Data[data_depan].nominal == 0) 
                     {
                         printf("\nUang yang anda masukan sudah pas\n");
-                        data_depan++;
-                        status--;
-                    }else if (Data[data_depan + 1].nominal > 0)
+                    }else if (Data[data_depan].nominal < 0)
                     {
                         printf("\nKembalian : %d \n", Data[data_depan + 1].nominal);
-                        data_depan++;
-                        status--;
                     }
                 }else
                 {
                     printf("\nAntrian Kosong\n");
                 }
+            status--;
             break;
         case 3:
             if (status != 0)
