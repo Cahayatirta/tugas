@@ -1,0 +1,12 @@
+head->prev->next = new
+new->next = head
+new->prev = head->prev
+head-> prev = new 
+head = new
+ 
+
+temp = head
+head = head->next
+head->prev->prev->next = head
+head->prev = head->prev->prev
+free(temp)

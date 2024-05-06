@@ -12,7 +12,7 @@ struct Pembayaran
 
 
 int main() {
-    int maks_antrian, pilihan,status = 0, data_depan = -1, data_belakang = -1, total_bayar = 0;
+    int maks_antrian, pilihan,status = 0, data_depan = -1, data_belakang = -1, total_bayar = 0, print;
     char keluar;
     printf("Program Antrian Pembayaran UKT\n");
     printf("Input maks antrian : ");
@@ -84,11 +84,17 @@ int main() {
             {
                 printf("\nAntrian Kosong\n");
             }else{
+                print = 0;
                 printf("\nDaftar Antrian\n");
                 printf("| %-40s | %-11s | %3s | %-16s | \n\n", "Nama", "NIM", "UKT", "Nominal");
-                for (int i = data_depan + 1; i < data_belakang + 1 ; i++)
+                for (int i = data_depan + 1; print < status + 1 ; i++)
                 {
+                    if (i == maks_antrian && i != status)
+                    {
+                        i = 0;
+                    }
                     printf("| %-40s | %-11s | %-3d | Rp.%-13d |\n", Data[i].nama, Data[i].nim, Data[i].ukt, Data[i].nominal);
+                    print++;
                 }
             }
         break;
