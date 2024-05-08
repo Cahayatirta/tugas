@@ -40,10 +40,10 @@ int main() {
                 printf("\nInput Data Mahasiswa\n");
                 getchar();
                 printf("Nama : ");
-                fgets(Data[data_belakang].nama, sizeof(Data[data_belakang + 1].nama), stdin);
+                fgets(Data[data_belakang].nama, sizeof(Data[data_belakang].nama), stdin);
                 strtok(Data[data_belakang].nama, "\n");
                 printf("Nim : ");
-                fgets(Data[data_belakang].nim, sizeof(Data[data_belakang + 1].nim), stdin);
+                fgets(Data[data_belakang].nim, sizeof(Data[data_belakang].nim), stdin);
                 strtok(Data[data_belakang].nim, "\n");
                 printf("UKT : ");
                 scanf("%d", &Data[data_belakang].ukt);
