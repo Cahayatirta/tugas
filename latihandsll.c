@@ -7,7 +7,7 @@ typedef struct Pembayaran {
     char nim[11];
     int ukt;
     int nominal;
-    struct Pembayaran *next;
+    struct Pembayaran *next, *prev;
 } Pembayaran;
 
 int main() {
@@ -15,11 +15,8 @@ int main() {
     char keluar;
     Pembayaran *head = NULL, *baru = NULL, *tail = NULL;
     int count = 0, total_bayar;
-    int maks_antrian; 
 
     printf("Program Antrian Pembayaran UKT\n");
-    printf("Input Maks Antrian dalam 1 waktu : ");
-    scanf("%d", &maks_antrian);
 
     while (1) {
         printf("\n\nMenu : \n1. Tambah Antrian\n2. Proses Pembayaran\n3. Lihat Antrian\n4. Keluar\n");
@@ -27,8 +24,6 @@ int main() {
 
         switch (pilihan) {
             case 1:
-                    if (count != maks_antrian)
-                    {
                         baru = (Pembayaran*)malloc(sizeof(Pembayaran));
                         if (baru == NULL) {
                             printf("Gagal mengalokasikan memori.");
@@ -54,15 +49,16 @@ int main() {
                         if (head == NULL) {
                             head = baru;
                             tail = baru;
+                            head->next = head;
+                            head->prev = head;
                         } else {
                             tail->next = baru;
+                            tail->next->prev = tail;
                             tail = tail->next;
+                            tail->next = head;
+                            head->prev = tail;
                         }
                         count++;
-                    }else
-                    {
-                        printf("\njumlah antrian sudah mencapai batas Maksimum yaitu %d", count);
-                    }
                 break;
             case 2:
                 if (head == NULL)
@@ -94,8 +90,16 @@ int main() {
                         printf("\nKembalian : %d \n", abs(temp->nominal));
                     }
                     count--;
+                    if (head->next != head)
+                    {
                     head = temp->next;
+                    head->prev = tail;
+                    tail->next = head;
                     free(temp);
+                    }else{
+                        free(head);
+                        head = NULL;
+                    }
                 }
             break;
             case 3:
@@ -108,11 +112,12 @@ int main() {
                     struct Pembayaran *temp = head;
                     printf("\nDaftar Antrian\n");
                     printf("| %-40s | %-11s | %3s | %-16s | \n\n", "Nama", "NIM", "UKT", "Nominal");
-                    while (temp != NULL)
+                    do
                     {
                         printf("| %-40s | %-11s | %-3d | Rp.%-13d |\n", temp->nama, temp->nim, temp->ukt, temp->nominal);
                         temp = temp->next;
-                    }
+                    } while (temp != head);
+                    
                 }
             break;
             case 4:

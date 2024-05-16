@@ -18,7 +18,7 @@ int main() {
     int maks_antrian; 
 
     printf("Program Antrian Pembayaran UKT\n");
-    printf("Input Maks Antrian dalam 1 waktu ");
+    printf("Input Maks Antrian dalam 1 waktu : ");
     scanf("%d", &maks_antrian);
 
     while (1) {
@@ -95,6 +95,7 @@ int main() {
                     }
                     count--;
                     head = temp->next;
+                    free(temp);
                 }
             break;
             case 3:
